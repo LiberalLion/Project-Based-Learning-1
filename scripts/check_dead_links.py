@@ -4,7 +4,7 @@ import requests
 import pandas as pd
 
 
-CODES = set([400, 404, 403, 408, 409, 501, 502, 503])
+CODES = {400, 404, 403, 408, 409, 501, 502, 503}
 
 df = pd.read_csv("projects.csv", sep=";")["url"]
 

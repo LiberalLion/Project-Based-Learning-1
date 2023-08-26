@@ -1,51 +1,46 @@
 import pandas as pd
 
 
-JS_FRAMEWORKS = set(
-    [
-        "Gatsby",
-        "Eleventy",
-        "Hugo",
-        "Node",
-        "NodeJS",
-        "React",
-        "React Native",
-        "Angular",
-        "Vue",
-        "VueJS",
-        "NextJS",
-        "Adonis JS",
-    ]
-)
+JS_FRAMEWORKS = {
+    "Gatsby",
+    "Eleventy",
+    "Hugo",
+    "Node",
+    "NodeJS",
+    "React",
+    "React Native",
+    "Angular",
+    "Vue",
+    "VueJS",
+    "NextJS",
+    "Adonis JS",
+}
 
-LANGUAGES = set(
-    [
-        "Python",
-        "C/C++",
-        "C#",
-        "Clojure",
-        "F#",
-        "Julia",
-        "Java",
-        "Javascript",
-        "Rust",
-        "Ruby",
-        "Haskell",
-        "Golang",
-        "PHP",
-        "HTML",
-        "Scala",
-        "Swift",
-        "Ocaml",
-        "Scala",
-        "Arduino",
-        "Kotlin",
-        "Dart",
-        "Erlang",
-        "Elixir",
-        "TypeScript",
-    ]
-)
+LANGUAGES = {
+    "Python",
+    "C/C++",
+    "C#",
+    "Clojure",
+    "F#",
+    "Julia",
+    "Java",
+    "Javascript",
+    "Rust",
+    "Ruby",
+    "Haskell",
+    "Golang",
+    "PHP",
+    "HTML",
+    "Swift",
+    "Ocaml",
+    "Scala",
+    "Arduino",
+    "Kotlin",
+    "Dart",
+    "Erlang",
+    "Elixir",
+    "TypeScript",
+}
 
 
 df = pd.read_csv("test.csv", sep=";")
@@ -56,14 +51,14 @@ for c, i in df["technology"].iteritems():
 
     if split_techno[0] in JS_FRAMEWORKS:
         new_values.append("Javascript")
+    elif (
+        len(split_techno) != 1
+        and split_techno[0] in LANGUAGES
+        or len(split_techno) == 1
+    ):
+        new_values.append(split_techno[0])
     else:
-        if len(split_techno) == 1:
-            new_values.append(split_techno[0])
-        else:
-            if split_techno[0] in LANGUAGES:
-                new_values.append(split_techno[0])
-            else:
-                new_values.append(split_techno[1])
+        new_values.append(split_techno[1])
 
 
 df["main_language"] = new_values
